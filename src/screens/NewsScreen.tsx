@@ -26,23 +26,18 @@ type ResponseType = {
 };
 
 // const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
-const NEWS_API_KEY = 'a09668ae0dd74475936e73e027a54b55';
-const ARTICLE_PER_PAGE = 10;
+const NEWS_API_KEY = 'c1d784ac2e534caab43956c2a016c369';
+const ARTICLE_PER_PAGE = 12;
 
 export default function NewsScreen() {
   const [pageCount, setPageCount] = useState<number>(1);
   const [hasMore, setHasMore] = useState<boolean>(true);
   const [news, setNews] = useState<News[]>([]);
+  const [userHasScrolled, setUserHasScrolled] = useState<boolean>(false);
 
   const url = `https://newsapi.org/v2/everything?q=tesla&pageSize=${ARTICLE_PER_PAGE}&page=${pageCount}&apiKey=${NEWS_API_KEY}`;
 
-  const {data, loading} = useFetch<ResponseType>(url);
-
-  const loadMoreNews = () => {
-    if (hasMore && !loading) {
-      setPageCount(prev => prev + 1);
-    }
-  };
+  const {data, loading, error} = useFetch<ResponseType>(url);
 
   useEffect(() => {
     if (data?.articles?.length) {
@@ -59,6 +54,16 @@ export default function NewsScreen() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [JSON.stringify(data), pageCount]);
 
+  const loadMoreNews = () => {
+    if (hasMore && !loading && userHasScrolled) {
+      setPageCount(prev => prev + 1);
+    }
+  };
+
+  console.log('====================================');
+  console.log({pageCount, hasMore, news, data, error, url});
+  console.log('====================================');
+
   return (
     <View style={{flex: 1, margin: 10}}>
       <FlatList
@@ -67,6 +72,7 @@ export default function NewsScreen() {
         renderItem={({item}) => <NewsCard article={item} />}
         onEndReached={loadMoreNews}
         onEndReachedThreshold={0.5}
+        onMomentumScrollBegin={() => setUserHasScrolled(true)}
         ListFooterComponent={
           loading ? <ActivityIndicator size="large" /> : null
         }
