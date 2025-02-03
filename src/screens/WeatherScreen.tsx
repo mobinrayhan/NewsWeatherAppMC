@@ -1,3 +1,4 @@
+import Geolocation from '@react-native-community/geolocation';
 import {ActivityIndicator, FlatList, View} from 'react-native';
 import WeatherCard from '../components/WeatherCard';
 import useFetch from '../hooks/useFetch';
@@ -10,6 +11,16 @@ export type ForeCast = {
   };
   weather: Array<{description: string}>;
   wind: {speed: string};
+};
+const getCurrentLocation = (callback: (lat: number, lon: number) => void) => {
+  Geolocation.getCurrentPosition(
+    position => {
+      const {latitude, longitude} = position.coords;
+      callback(latitude, longitude);
+    },
+    error => console.log(error),
+    {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000},
+  );
 };
 
 const API_KEY = '587d7d5a1a364e992130de7c104cd402';
