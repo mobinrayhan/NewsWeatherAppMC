@@ -35,8 +35,18 @@ export const AuthProvider = ({children}: AuthProviderProps) => {
   const {navigate} = useNavigation();
 
   useEffect(() => {
-    const unsubscribe = auth().onAuthStateChanged(setUser);
-    setLoading(false);
+    const unsubscribe = auth().onAuthStateChanged(authUser => {
+      if (authUser) {
+        setUser({
+          email: authUser.email || 'No email',
+          uid: authUser.uid,
+        });
+      } else {
+        setUser(null);
+      }
+      setLoading(false);
+    });
+
     return unsubscribe;
   }, []);
 
