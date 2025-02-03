@@ -1,4 +1,5 @@
 import Geolocation from '@react-native-community/geolocation';
+import {useEffect, useState} from 'react';
 import {ActivityIndicator, FlatList, View} from 'react-native';
 import WeatherCard from '../components/WeatherCard';
 import useFetch from '../hooks/useFetch';
@@ -12,26 +13,50 @@ export type ForeCast = {
   weather: Array<{description: string}>;
   wind: {speed: string};
 };
+const API_KEY = '587d7d5a1a364e992130de7c104cd402';
 
-const getCurrentLocation = (callback: (lat: number, lon: number) => void) => {
-  Geolocation.getCurrentPosition(
-    position => {
-      const {latitude, longitude} = position.coords;
-      callback(latitude, longitude);
-    },
-    error => console.log(error),
-    {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000},
-  );
+const getCurrentLocation = () => {
+  return new Promise((resolve, reject) => {
+    Geolocation.getCurrentPosition(
+      position => {
+        const {latitude, longitude} = position.coords;
+        resolve({latitude, longitude});
+      },
+      error => {
+        console.error('Error getting location:', error);
+        reject(error);
+      },
+      {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000},
+    );
+  });
 };
 
-const API_KEY = '587d7d5a1a364e992130de7c104cd402';
+type Cords = {
+  latitude: number;
+  longitude: number;
+};
+
 export default function WeatherScreen() {
-  const url = `https://api.openweathermap.org/data/2.5/forecast?lat=23.810331&lon=90.412521&appid=${API_KEY}`;
+  const [cords, setCords] = useState<Cords>();
+  const url = `https://api.openweathermap.org/data/2.5/forecast?lat=${
+    cords?.latitude || 23.810331
+  }&lon=${cords?.longitude || 90.412521}&appid=${API_KEY}`;
 
   const {data, loading} = useFetch(url);
 
   const forecasts = (data as {list: ForeCast[]})?.list;
 
+  useEffect(() => {
+    const fetchLocation = async () => {
+      try {
+        const location = await getCurrentLocation();
+        setCords(location as Cords);
+      } catch (error) {
+        console.error('Location error:', error);
+      }
+    };
+    fetchLocation();
+  }, []);
   return (
     <View style={{flex: 1}}>
       <FlatList
