@@ -37,7 +37,7 @@ export default function NewsScreen() {
 
   const url = `https://newsapi.org/v2/everything?q=tesla&pageSize=${ARTICLE_PER_PAGE}&page=${pageCount}&apiKey=${NEWS_API_KEY}`;
 
-  const {data, loading, error} = useFetch<ResponseType>(url);
+  const {data, loading} = useFetch<ResponseType>(url);
 
   useEffect(() => {
     if (data?.articles?.length) {
@@ -59,10 +59,6 @@ export default function NewsScreen() {
       setPageCount(prev => prev + 1);
     }
   };
-
-  console.log('====================================');
-  console.log({pageCount, hasMore, news, data, error, url});
-  console.log('====================================');
 
   return (
     <View style={{flex: 1, margin: 10}}>

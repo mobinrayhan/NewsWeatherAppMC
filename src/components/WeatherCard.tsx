@@ -29,12 +29,10 @@ const styles = StyleSheet.create({
     padding: 16,
     marginVertical: 8,
     marginHorizontal: 8,
-    // Shadow for iOS
     shadowColor: '#000',
     shadowOffset: {width: 0, height: 2},
     shadowOpacity: 0.1,
     shadowRadius: 4,
-    // Elevation for Android
     elevation: 2,
   },
   date: {
