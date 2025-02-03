@@ -5,7 +5,7 @@ import {ThemeSelector} from '../redux/store';
 import {useThemeSelector} from '../store/hooks';
 
 const ProfileScreen = () => {
-  const {signOut, user} = useAuthCtx();
+  const {signOut, user, loading} = useAuthCtx();
   const darkMode = useThemeSelector<ThemeSelector>(
     state => state.theme.darkMode,
   ) as boolean;
@@ -16,8 +16,11 @@ const ProfileScreen = () => {
       <View style={styles.userContainer}>
         <Text style={styles.text}>Email: {user.email}</Text>
         <Text style={styles.text}>User ID: {user.uid}</Text>
+
         <Pressable onPress={signOut} style={styles.button}>
-          <Text style={styles.buttonText}>Logout</Text>
+          <Text style={styles.buttonText}>
+            {loading ? 'Logging out...' : 'Logout'}
+          </Text>
         </Pressable>
       </View>
     )

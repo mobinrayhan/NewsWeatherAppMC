@@ -13,7 +13,7 @@ import {useThemeSelector} from '../store/hooks';
 const LoginScreen: React.FC = () => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
-  const {signIn} = useAuthCtx();
+  const {signIn, loading} = useAuthCtx();
 
   const darkMode = useThemeSelector<ThemeSelector>(
     state => state.theme.darkMode,
@@ -38,6 +38,8 @@ const LoginScreen: React.FC = () => {
         onChangeText={setEmail}
         keyboardType="email-address"
         autoCapitalize="none"
+        selectTextOnFocus={!loading}
+        editable={!loading}
       />
 
       <TextInput
@@ -47,6 +49,8 @@ const LoginScreen: React.FC = () => {
         secureTextEntry
         value={password}
         onChangeText={setPassword}
+        selectTextOnFocus={!loading}
+        editable={!loading}
       />
 
       <TouchableOpacity
@@ -60,7 +64,7 @@ const LoginScreen: React.FC = () => {
             styles.buttonText,
             darkMode ? styles.darkButtonText : styles.lightButtonText,
           ]}>
-          Login
+          {loading ? 'Logging ... ' : 'Login'}
         </Text>
       </TouchableOpacity>
 

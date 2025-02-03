@@ -52,25 +52,35 @@ export const AuthProvider = ({children}: AuthProviderProps) => {
 
   const signIn = async (email: string, password: string) => {
     try {
+      setLoading(true);
       await auth().signInWithEmailAndPassword(email, password);
       Alert.alert('Login Successful', 'Welcome back!', [
         {text: 'OK', onPress: () => navigate('Profile')},
       ]);
+      setLoading(false);
     } catch (error) {
+      setLoading(false);
       if (error instanceof Error) {
         Alert.alert('Login Failed', error.message);
       } else {
         Alert.alert('Login Failed');
       }
+    } finally {
+      setLoading(false);
     }
   };
 
   const signOut = async () => {
     try {
+      setLoading(true);
       await auth().signOut();
       navigate('Login');
+      setLoading(false);
     } catch (error) {
+      setLoading(false);
       console.error('Error signing out', error);
+    } finally {
+      setLoading(false);
     }
   };
 
