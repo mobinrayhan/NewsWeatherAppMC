@@ -1,9 +1,13 @@
+import {configureStore} from '@reduxjs/toolkit';
+import {themeSlice} from '../redux/themeSlice';
+
 const store = configureStore({
   reducer: {
     theme: themeSlice.reducer,
   },
 });
 
-export type RootState = ReturnType<typeof store.getState>;
-export type AppDispatch = typeof store.dispatch;
+export type ThemeSelector = ReturnType<typeof store.getState>;
+export type ThemeDispatch = typeof store.dispatch;
+
 export default store;

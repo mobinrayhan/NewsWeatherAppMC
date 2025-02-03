@@ -1,8 +1,8 @@
 import React from 'react';
 import {Image, Pressable, StyleSheet, Text, View} from 'react-native';
-import {ThemeSelector} from '../redux/store';
 import {News} from '../screens/NewsScreen';
 import {useThemeSelector} from '../store/hooks';
+import {ThemeSelector} from '../store/store';
 
 const NewsCard = ({article}: {article: News}) => {
   const {title, author, source, publishedAt, description, urlToImage} = article;

@@ -2,8 +2,8 @@ import {StyleSheet, Text, View} from 'react-native';
 import {ForeCast} from '../screens/WeatherScreen';
 
 import React from 'react';
-import {ThemeSelector} from '../redux/store';
 import {useThemeSelector} from '../store/hooks';
+import {ThemeSelector} from '../store/store';
 
 export default function WeatherCard({forecast}: {forecast: ForeCast}) {
   const darkMode = useThemeSelector<ThemeSelector>(
