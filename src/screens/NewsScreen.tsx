@@ -28,7 +28,7 @@ type ResponseType = {
 };
 
 // const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
-const NEWS_API_KEY = 'c1d784ac2e534caab43956c2a016c369';
+const NEWS_API_KEY = '2cb08c41130f431ca9754d488e5992f0';
 const ARTICLE_PER_PAGE = 12;
 
 export default function NewsScreen() {
