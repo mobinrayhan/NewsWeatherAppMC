@@ -1,97 +1,80 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# News & Weather App
 
-# Getting Started
+This is a simple News & Weather App built with React Native CLI. It fetches news from NewsAPI and weather data from OpenWeather API, with features like offline caching, user authentication, and dark mode.
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+## Key Features:
 
-## Step 1: Start Metro
+- **User Authentication**: Firebase (Email/Password)
+- **News Feed**: Infinite scrolling using NewsAPI
+- **Weather Forecast**: Geolocation-based weather info using OpenWeather API
+- **Offline Mode**: Data caching with AsyncStorage
+- **State Management**: Redux Toolkit & Context API
+- **Dark Mode Toggle**: Switch between light and dark modes
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+## Setup & Run
 
-To start the Metro dev server, run the following command from the root of your React Native project:
+### Prerequisites:
 
-```sh
-# Using npm
-npm start
+1. Node.js installed on your machine.
+2. React Native CLI installed globally.
+3. Firebase account for authentication setup.
+4. NewsAPI key from [NewsAPI](https://newsapi.org/).
+5. OpenWeather API key from [OpenWeather](https://openweathermap.org/api).
+6. Android Studio or Xcode (for emulator or real device testing).
 
-# OR using Yarn
-yarn start
-```
+   (BTW : I shared My API key ! cz its testing apps)
 
-## Step 2: Build and run your app
+### Steps:
 
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
+1. **Clone the Repository**:
 
-### Android
+   ```bash
+   git clone https://github.com/mobinrayhan/weather-and-news-rn-cli.git
 
-```sh
-# Using npm
-npm run android
+   cd weather-and-news-rn-cli
+   ```
 
-# OR using Yarn
-yarn android
-```
+2. **Install Dependencies**:
 
-### iOS
+   ```bash
+   npm install
+   ```
 
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
+3. **Run the App**:
 
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
+   - For Android:
+     ```bash
+     npx react-native run-android
+     ```
+   - For iOS:
+     ```bash
+     npx react-native run-ios
+     ```
 
-```sh
-bundle install
-```
+4. **Enjoy!**: Open the app on your device/emulator, and you should see the news feed, weather forecast, and the option to log in with Firebase.
 
-Then, and every time you update your native dependencies, run:
+Great! Here's how you can update your README.md to include the Google Drive link for the APK:
 
-```sh
-bundle exec pod install
-```
+---
 
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
+### Final APK:
 
-```sh
-# Using npm
-npm run ios
+The final APK file is available for download from the following Google Drive link:
 
-# OR using Yarn
-yarn ios
-```
+# [Download APK](https://drive.google.com/file/d/1-K-ZUwVbtcnlPYas0037EyxepGRBJnAP/view?usp=sharing)
 
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
+### Demo Video:
 
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
+A video of starting the project is attached, where I demonstrate the app’s features and walk through the setup.
 
-## Step 3: Modify your app
+[Watch Demo Video](https://drive.google.com/your-video-link-here)
 
-Now that you have successfully run the app, let's make changes!
+## Thank You!
 
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
+Thank you for reviewing my project! I appreciate the opportunity to work on this assignment and showcase my skills. If you have any questions or feedback, please feel free to reach out.
 
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
+Looking forward to hearing from you!
 
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
+Best regards,
 
-## Congratulations! :tada:
-
-You've successfully run and modified your React Native App. :partying_face:
-
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+### [Mobin](mailto:sdm241405@gmail.com)
