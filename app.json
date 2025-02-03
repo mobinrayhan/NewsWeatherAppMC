@@ -1,4 +1,5 @@
 {
   "name": "NewsWeatherAppMC",
-  "displayName": "NewsWeatherAppMC"
+  "displayName": "NewsWeatherAppMC",
+  "jsEngine": "jsc"
 }

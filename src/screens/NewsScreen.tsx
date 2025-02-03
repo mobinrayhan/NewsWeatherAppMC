@@ -1,7 +1,9 @@
+import NetInfo from '@react-native-community/netinfo';
 import {useEffect, useState} from 'react';
 import {ActivityIndicator, FlatList, View} from 'react-native';
 import NewsCard from '../components/NewsCard';
 import useFetch from '../hooks/useFetch';
+import {getNewsData, storeNewsData} from '../utils/asyncStorage';
 
 type Source = {
   id: string | null;
@@ -53,11 +55,28 @@ export default function NewsScreen() {
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [JSON.stringify(data), pageCount]);
+
   const loadMoreNews = () => {
     if (hasMore && !loading && userHasScrolled) {
       setPageCount(prev => prev + 1);
     }
   };
+
+  useEffect(() => {
+    const checkNetworkStatus = async () => {
+      const state = await NetInfo.fetch();
+
+      if (state.isConnected && data?.articles) {
+        setNews(data?.articles);
+        await storeNewsData(data.articles);
+      } else {
+        const localForecasts = await getNewsData();
+        setNews(localForecasts);
+      }
+    };
+    checkNetworkStatus();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [JSON.stringify(data?.articles)]);
 
   return (
     <View style={{flex: 1, margin: 10}}>

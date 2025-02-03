@@ -1,8 +1,10 @@
 import Geolocation from '@react-native-community/geolocation';
+import NetInfo from '@react-native-community/netinfo';
 import {useEffect, useState} from 'react';
 import {ActivityIndicator, FlatList, View} from 'react-native';
 import WeatherCard from '../components/WeatherCard';
 import useFetch from '../hooks/useFetch';
+import {getWeatherData, storeWeatherData} from '../utils/asyncStorage';
 
 export type ForeCast = {
   dt_txt: string;
@@ -37,6 +39,8 @@ type Cords = {
 };
 
 export default function WeatherScreen() {
+  const [forecastsSt, setForecastsSt] = useState<ForeCast[]>([]);
+
   const [cords, setCords] = useState<Cords>();
   const url = `https://api.openweathermap.org/data/2.5/forecast?lat=${
     cords?.latitude || 23.810331
@@ -57,10 +61,27 @@ export default function WeatherScreen() {
     };
     fetchLocation();
   }, []);
+
+  useEffect(() => {
+    const checkNetworkStatus = async () => {
+      const state = await NetInfo.fetch();
+
+      if (state.isConnected && forecasts) {
+        setForecastsSt(forecasts);
+        await storeWeatherData(forecasts);
+      } else {
+        const localForecasts = await getWeatherData();
+        setForecastsSt(localForecasts);
+      }
+    };
+    checkNetworkStatus();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [JSON.stringify(forecasts)]);
+
   return (
     <View style={{flex: 1}}>
       <FlatList
-        data={forecasts}
+        data={forecastsSt}
         keyExtractor={(item, index) => index.toString()}
         renderItem={({item}) => <WeatherCard forecast={item} />}
         contentContainerStyle={{
