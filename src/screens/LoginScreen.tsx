@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-
 import {
   StyleSheet,
   Text,
@@ -8,24 +7,33 @@ import {
   View,
 } from 'react-native';
 import {useAuthCtx} from '../ctx/auth-ctx';
+import {ThemeSelector} from '../redux/store';
+import {useThemeSelector} from '../store/hooks';
 
 const LoginScreen: React.FC = () => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const {signIn} = useAuthCtx();
 
+  const darkMode = useThemeSelector<ThemeSelector>(
+    state => state.theme.darkMode,
+  );
+
   const handleLogin = async () => {
     await signIn(email, password);
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Login</Text>
+    <View style={[styles.container]}>
+      <Text
+        style={[styles.title, darkMode ? styles.darkText : styles.lightText]}>
+        Login
+      </Text>
 
       <TextInput
-        style={styles.input}
+        style={[styles.input, darkMode ? styles.darkInput : styles.lightInput]}
         placeholder="Email"
-        placeholderTextColor="#999"
+        placeholderTextColor={darkMode ? 'white' : '#999'}
         value={email}
         onChangeText={setEmail}
         keyboardType="email-address"
@@ -33,20 +41,37 @@ const LoginScreen: React.FC = () => {
       />
 
       <TextInput
-        style={styles.input}
+        style={[styles.input, darkMode ? styles.darkInput : styles.lightInput]}
         placeholder="Password"
-        placeholderTextColor="#999"
+        placeholderTextColor={darkMode ? 'white' : '#999'}
         secureTextEntry
         value={password}
         onChangeText={setPassword}
       />
 
-      <TouchableOpacity style={styles.button} onPress={handleLogin}>
-        <Text style={styles.buttonText}>Login</Text>
+      <TouchableOpacity
+        style={[
+          styles.button,
+          darkMode ? styles.darkButton : styles.lightButton,
+        ]}
+        onPress={handleLogin}>
+        <Text
+          style={[
+            styles.buttonText,
+            darkMode ? styles.darkButtonText : styles.lightButtonText,
+          ]}>
+          Login
+        </Text>
       </TouchableOpacity>
 
       <TouchableOpacity style={styles.link}>
-        <Text style={styles.linkText}>Don't have an account? Sign Up</Text>
+        <Text
+          style={[
+            styles.linkText,
+            darkMode ? styles.darkLinkText : styles.lightLinkText,
+          ]}>
+          Don't have an account? Sign Up
+        </Text>
       </TouchableOpacity>
     </View>
   );
@@ -57,45 +82,73 @@ export default LoginScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-
     padding: 20,
+  },
+  darkContainer: {
+    backgroundColor: '#2e3440',
   },
 
   title: {
     fontSize: 32,
     fontWeight: 'bold',
     marginBottom: 20,
-    color: '#333',
+  },
+  darkText: {
+    color: '#ffdead',
+  },
+  lightText: {
+    color: '#2e3440',
   },
   input: {
     width: '100%',
     padding: 15,
     borderWidth: 1,
-    borderColor: '#ccc',
-    color: 'black',
     borderRadius: 8,
     marginBottom: 10,
-    backgroundColor: '#f9f9f9',
+  },
+  darkInput: {
+    borderColor: '#1E90FF',
+    backgroundColor: '#3b4252',
+    color: 'white',
+  },
+  lightInput: {
+    borderColor: '#1E90FF',
+    backgroundColor: '#f5fffa',
+    color: '#2e3440',
   },
   button: {
-    backgroundColor: '#1e90ff',
     padding: 15,
     width: '100%',
     alignItems: 'center',
     borderRadius: 8,
   },
+  darkButton: {
+    backgroundColor: '#1E90FF',
+  },
+  lightButton: {
+    backgroundColor: '#1E90FF',
+  },
   buttonText: {
-    color: '#fff',
     fontWeight: 'bold',
+  },
+  darkButtonText: {
+    color: '#2e3440',
+  },
+  lightButtonText: {
+    color: '#f8f8ff',
   },
   link: {
     marginTop: 15,
   },
   linkText: {
-    color: '#1e90ff',
     textDecorationLine: 'underline',
+  },
+  darkLinkText: {
+    color: '#1E90FF',
+  },
+  lightLinkText: {
+    color: '#1e90ff',
   },
 });
