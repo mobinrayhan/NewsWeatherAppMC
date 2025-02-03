@@ -29,9 +29,9 @@ This is a simple News & Weather App built with React Native CLI. It fetches news
 1. **Clone the Repository**:
 
    ```bash
-   git clone https://github.com/mobinrayhan/weather-and-news-rn-cli.git
+   git clone https://github.com/mobinrayhan/NewsWeatherAppMC.git
 
-   cd weather-and-news-rn-cli
+   cd NewsWeatherAppMC
    ```
 
 2. **Install Dependencies**:
