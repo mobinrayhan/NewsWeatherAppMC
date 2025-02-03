@@ -67,8 +67,7 @@ export default function NewsScreen() {
       const state = await NetInfo.fetch();
 
       if (state.isConnected && data?.articles) {
-        setNews(data?.articles);
-        await storeNewsData(data.articles);
+        await storeNewsData(news);
       } else {
         const localForecasts = await getNewsData();
         setNews(localForecasts);
