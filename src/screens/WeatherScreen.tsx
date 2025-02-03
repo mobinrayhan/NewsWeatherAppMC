@@ -12,6 +12,7 @@ export type ForeCast = {
   weather: Array<{description: string}>;
   wind: {speed: string};
 };
+
 const getCurrentLocation = (callback: (lat: number, lon: number) => void) => {
   Geolocation.getCurrentPosition(
     position => {
