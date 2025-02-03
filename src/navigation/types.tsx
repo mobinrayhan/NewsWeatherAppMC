@@ -3,6 +3,7 @@ export type RootStackParamList = {
   News: undefined;
   Weather: undefined;
   Login: undefined;
+  Profile: undefined;
 };
 
 // export type RootStackScreenProps<T extends keyof RootStackParamList> =

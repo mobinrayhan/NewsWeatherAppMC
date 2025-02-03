@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "120292301696",
+    "project_id": "react-native-interview-43b4d",
+    "storage_bucket": "react-native-interview-43b4d.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:120292301696:android:e99871a4c79b42ebc8ff65",
+        "android_client_info": {
+          "package_name": "com.newsweatherappmc"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBjNFb93mk2DXnGAWooUpph94wfNofUPXA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

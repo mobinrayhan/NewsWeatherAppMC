@@ -1,31 +1,39 @@
 import {useNavigation} from '@react-navigation/native';
 import React from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {useAuthCtx} from '../ctx/auth-ctx';
 
 const HomeScreen = () => {
   const navigation = useNavigation();
+  const {user} = useAuthCtx();
 
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Welcome to News & Weather App</Text>
-
       <TouchableOpacity
         style={styles.button}
         onPress={() => navigation.navigate('News')}>
         <Text style={styles.buttonText}>Check News</Text>
       </TouchableOpacity>
-
       <TouchableOpacity
         style={styles.button}
         onPress={() => navigation.navigate('Weather')}>
         <Text style={styles.buttonText}>Check Weather</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => navigation.navigate('Login')}>
-        <Text style={styles.buttonText}>Login</Text>
-      </TouchableOpacity>
+      {user ? (
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => navigation.navigate('Profile')}>
+          <Text style={styles.buttonText}>Profile</Text>
+        </TouchableOpacity>
+      ) : (
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => navigation.navigate('Login')}>
+          <Text style={styles.buttonText}>Login</Text>
+        </TouchableOpacity>
+      )}
     </View>
   );
 };

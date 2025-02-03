@@ -53,7 +53,6 @@ export default function NewsScreen() {
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [JSON.stringify(data), pageCount]);
-
   const loadMoreNews = () => {
     if (hasMore && !loading && userHasScrolled) {
       setPageCount(prev => prev + 1);
